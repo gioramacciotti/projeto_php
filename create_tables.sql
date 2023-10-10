@@ -4,7 +4,8 @@ CREATE TABLE user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
 );
 
 -- Create table for job titles
@@ -35,6 +36,7 @@ CREATE TABLE employee (
     password VARCHAR(255) NOT NULL,
     job_title_id INT NOT NULL,
     city_id INT NOT NULL,
+    address VARCHAR(255) NOT NULL,
     FOREIGN KEY (job_title_id) REFERENCES job_title(id),
     FOREIGN KEY (city_id) REFERENCES city(id)
 );
@@ -46,6 +48,7 @@ CREATE TABLE client (
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     city_id INT NOT NULL,
+    address VARCHAR(255) NOT NULL,
     FOREIGN KEY (city_id) REFERENCES city(id)
 );
 
@@ -58,3 +61,5 @@ CREATE TABLE order (
     FOREIGN KEY (client_id) REFERENCES client(id),
     FOREIGN KEY (employee_id) REFERENCES employee(id)
 );
+
+
