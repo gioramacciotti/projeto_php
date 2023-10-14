@@ -1,65 +1,58 @@
--- Active: 1696892627153@@127.0.0.1@3306@projeto_php
--- Create user table
-CREATE TABLE user (
+-- Criação da Tabela clientes
+CREATE TABLE clientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    numero VARCHAR(10),
+    bairro VARCHAR(100),
+    cidade VARCHAR(100),
+    estado CHAR(2) NOT NULL,
+    email VARCHAR(255),
+    cpf_cnpj VARCHAR(20) UNIQUE,
+    rg VARCHAR(20) UNIQUE,
+    telefone VARCHAR(20),
+    celular VARCHAR(20),
+    data_nasc DATE
 );
 
--- Create table for job titles
-CREATE TABLE job_title (
+-- Criação da Tabela login_usuarios
+CREATE TABLE login_usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL
+    login VARCHAR(50) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+    UNIQUE KEY (login)
 );
 
--- Create table for states
-CREATE TABLE state (
+-- Criação da Tabela pedidos
+CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    data DATE NOT NULL,
+    id_cliente INT,
+    observacao VARCHAR(255),
+    cond_pagto VARCHAR(50),
+    prazo_entrega VARCHAR(10),
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+    INDEX (id_cliente)
 );
 
--- Create table for cities
-CREATE TABLE city (
+-- Criação da Tabela produto
+CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    state_id INT NOT NULL,
-    FOREIGN KEY (state_id) REFERENCES state(id)
+    nome VARCHAR(255) NOT NULL,
+    qtde_estoque INT NOT NULL,
+    valor_unitario DECIMAL(10, 2) NOT NULL,
+    unidade_medida VARCHAR(20)
 );
 
--- Create table for employees
-CREATE TABLE employee (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    job_title_id INT NOT NULL,
-    city_id INT NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    FOREIGN KEY (job_title_id) REFERENCES job_title(id),
-    FOREIGN KEY (city_id) REFERENCES city(id)
+-- Criação da Tabela itens_pedido
+CREATE TABLE itens_pedido (
+    id_pedido INT,
+    id_produto INT,
+    qtde INT NOT NULL,
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id),
+    INDEX (id_pedido, id_produto)
 );
-
--- Create table for clients
-CREATE TABLE client (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    city_id INT NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    FOREIGN KEY (city_id) REFERENCES city(id)
-);
-
--- Create table for orders
-CREATE TABLE order (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    client_id INT NOT NULL,
-    employee_id INT NOT NULL,
-    order_date DATE NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES client(id),
-    FOREIGN KEY (employee_id) REFERENCES employee(id)
-);
-
-
