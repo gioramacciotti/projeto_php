@@ -104,8 +104,7 @@ if (session_status() == PHP_SESSION_NONE) {
             align-items: center;
         }
 
-        .home-link,
-        .sign-out-link {
+        .home-link {
             color: #08103B;
             text-decoration: none;
             display: flex;
@@ -113,8 +112,7 @@ if (session_status() == PHP_SESSION_NONE) {
             margin-right: 15px;
         }
 
-        .home-icon::after,
-        .sign-out-icon::after {
+        .home-icon::after {
             content: "\00a0";
         }
     </style>
@@ -153,11 +151,8 @@ if (session_status() == PHP_SESSION_NONE) {
             <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
         </div>
         <div style="display: flex; align-items: center;">
-            <a href="#" class="home-link">
+            <a href="login.php" class="home-link">
                 <i class="fas fa-home"></i>&nbsp;Início
-            </a>
-            <a href="#" class="sign-out-link">
-                <i class="fas fa-sign-out-alt"></i>&nbsp;Sair
             </a>
         </div>
     </header>
@@ -175,78 +170,6 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
         <form id="user-registration-form" action="inc_usuario.php" method="POST">
             <div class="fieldset">
-                <span class="legend-text">Informações Pessoais</span>
-                <p>
-                <div>
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" name="nome" required oninput="restrictMaxLength(this, 100)" placeholder="Informe seu nome completo">
-                    <label for="data_nasc">Data de Nascimento:</label>
-                    <input type="date" name="data_nasc" required placeholder="dd/mm/yyyy">
-                </div>
-            </div>
-            <div class="fieldset">
-                <span class="legend-text">Endereço</span>
-                <p>
-                <div class="row">
-                    <div>
-                        <label for="endereco">Endereço:</label>
-                        <input type="text" id="endereco" name="endereco" required oninput="restrictMaxLength(this, 100)" placeholder="Informe seu endereço">
-                        <label for="numero">Número:</label>
-                        <input type="text" id="numero" name="numero" required oninput="restrictMaxLength(this, 10)" placeholder="Informe o número">
-                    </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="bairro">Bairro:</label>
-                        <input type="text" id="bairro" name="bairro" required oninput="restrictMaxLength(this, 50)" placeholder="Informe o bairro">
-                    </div>
-                    <div>
-                        <label for="cidade">Cidade:</label>
-                        <input type="text" id="cidade" name="cidade" required oninput="restrictMaxLength(this, 60)" placeholder="Informe a cidade">
-                    </div>
-                    <div>
-                        <label for="estado">Estado:</label>
-                        <select id="estado" name="estado" required>
-                            <option value="SP">SP</option>
-                            <option value="RJ">RJ</option>
-                            <option value="MG">MG</option>
-                            <option value="RS">RS</option>
-                            <option value="PR">PR</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="fieldset">
-                <span class="legend-text">Informações de Contato</span>
-                <p>
-                <div class="row">
-                    <div>
-                        <label for="email">E-mail de Contato:</label>
-                        <input type="email" id="email" name="email" required oninput="restrictMaxLength(this, 100)" placeholder="Informe o e-mail de contato">
-                    </div>
-                    <div>
-                        <label for="cpf_cnpj">CPF ou CNPJ:</label>
-                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" required oninput="restrictMaxLength(this, 14)" placeholder="Informe o CPF ou CNPJ">
-                    </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="rg">Número de RG:</label>
-                        <input type="text" id="rg" name="rg" required oninput="restrictMaxLength(this, 10)" placeholder="Informe o número de RG">
-                    </div>
-                    <div>
-                        <label for="telefone">Telefone de Contato:</label>
-                        <input type="text" id="telefone" name="telefone" oninput="restrictMaxLength(this, 10)" placeholder="Informe o telefone de contato">
-                    </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="celular">Celular:</label>
-                        <input type="text" id="celular" name="celular" oninput="restrictMaxLength(this, 11)" placeholder="Informe o número de celular">
-                    </div>
-                </div>
-            </div>
-            <div class="fieldset">
                 <span class="legend-text">Informações de Acesso</span>
                 <p>
                 <div class="row">
@@ -257,9 +180,8 @@ if (session_status() == PHP_SESSION_NONE) {
                     <div style="position: relative;">
                         <label for="senha">Senha de Acesso:</label>
                         <div class="password-container">
-                            <input type="password" id="senha" name="senha" required oninput="restrictMaxLength(this, 30)" placeholder="Escolha uma senha de acesso">
-                            <i class="fas fa-eye-slash toggle-password-icon" id="toggle-password-icon" onclick="togglePasswordVisibility()"></i>
-                        </div>
+                        <input type="password" id="senha" name="senha" required oninput="restrictMaxLength(this, 30)" placeholder="Escolha uma senha de acesso">
+                        <i class="fas fa-eye-slash toggle-password-icon" id="toggle-password-icon" onclick="togglePasswordVisibility()"></i>
                     </div>
                 </div>
             </div>
@@ -270,6 +192,4 @@ if (session_status() == PHP_SESSION_NONE) {
         </form>
     </div>
 </body>
-
 </html>
-

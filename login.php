@@ -32,13 +32,13 @@ if (session_status() == PHP_SESSION_NONE) {
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            width: 27%;
+            width: 30%;
             margin: auto;
             border: 4px solid #033255;
         }
 
         h1 {
-            color: #333;
+            color: #033255;
             text-align: center;
         }
         
@@ -46,6 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
             text-align: center;
             font-weight: normal;
             font-size: 14px;
+            color: #033255;
         }
 
         label {
@@ -80,17 +81,18 @@ if (session_status() == PHP_SESSION_NONE) {
         }
 
         button {
-            background-color: #136DAF;
+            background-color: #033255;
             color: #fff;
-            padding: 15px 20px;
+            padding: 15px 15px;
             border: none;
-            border-radius: 7px;
+            border-radius: 10px;
             cursor: pointer;
             width: 40%;
+            font-weight: bold;
         }
 
         button:hover {
-            background-color: #033255;
+            background-color: #136DAF;
         }
 
         header {
@@ -142,9 +144,12 @@ if (session_status() == PHP_SESSION_NONE) {
             unset($_SESSION['msg']);
         }
         ?><br>
-            <div class="btn-container">
-                <button type="submit">Entrar</button>
-            </div>
+        <div class="btn-container">
+            <button type="submit">ENTRAR</button>
+        </div><br>
+        <p style="text-align: center; margin-top: 10px;">
+            Não tem uma conta? <a href="cad_usuario.php">Registre-se</a>
+        </p>
         </form>
     </div>
 </body>

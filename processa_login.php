@@ -3,18 +3,23 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+include('conexao.php');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    require 'conexao.php'; // Include your database connection code
-
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     try {
-        $con = conectar(); // Call the conectar function to get the database connection
+        $con = mysqli_connect($servidor, $usuario, $senha, $db); 
 
-        // Query to retrieve user information
+        if (!$con) {
+            $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>Erro na conexão com MySQL</b></p>";
+            header("Location: login.php");
+            exit;
+        }
+
         $query = "SELECT id, senha FROM login_usuarios WHERE login = ?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("s", $username);
@@ -28,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $username;
 
-            header("Location: inc_usuario.php");
+            header("Location: index.html");
             exit;
         } else {
             $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>Credenciais inválidas. Tente novamente.</b></p>";
