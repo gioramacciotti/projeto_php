@@ -9,17 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
     try {
-        $con = mysqli_connect($servidor, $usuario, $senha, $db); 
-
-        if (!$con) {
-            $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>Erro na conexão com MySQL</b></p>";
-            header("Location: login.php");
-            exit;
-        }
-
         $query = "SELECT id, senha FROM login_usuarios WHERE login = ?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("s", $username);
@@ -41,11 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
     } catch (mysqli_sql_exception $exception) {
-        $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>Erro de banco de dados: " . $exception->getMessage() . "</b></p>";
+        $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>Erro durante a autenticação.</b></p>";
         header("Location: login.php");
         throw $exception;
-    } finally {
-        mysqli_close($con);
     }
 }
 ?>

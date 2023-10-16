@@ -32,45 +32,37 @@ $result = mysqli_query($con, $query);
             padding: 0;
         }
 
-        header {
-            background-color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .home-link,
-        .sign-out-link {
-            color: #08103B;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-
-        .home-icon::after,
-        .sign-out-icon::after {
-            content: "\00a0";
-        }
-
         .container {
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            width: 70%;
             margin: 20px auto;
+            max-width: 90%; /* Define a largura máxima do container */
+            overflow-x: auto;
         }
 
         h1 {
             color: #333;
             text-align: center;
+        }
+
+        label {
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 98%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
 
         table {
@@ -83,7 +75,7 @@ $result = mysqli_query($con, $query);
         }
 
         th, td {
-            padding: 12px;
+            padding: 7px;
             text-align: left;
         }
 
@@ -105,23 +97,49 @@ $result = mysqli_query($con, $query);
             justify-content: space-between;
         }
 
-        .btn-alterar,
-        .btn-excluir {
+        button {
             background-color: #136DAF;
             color: #fff;
-            padding: 10px;
+            padding: 8px 20px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            width: 48%;
         }
 
-        .btn-excluir {
-            background-color: #FF0000;
+        button:hover {
+            background-color: #033255;
         }
 
-        .btn-container {
+        .toggle-password-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 10px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .home-link,
+        .sign-out-link {
+            color: #08103B;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
         }
     </style>
 </head>
@@ -179,28 +197,16 @@ $result = mysqli_query($con, $query);
                     echo "<td>" . $row['data_nasc'] . "</td>";
                     echo "<td>
                             <div class='btn-container'>
-                                <button class='btn-alterar' onclick='alterarCliente(" . $row['id'] . ")'>Alterar</button>
-                                <button class='btn-excluir' onclick='excluirCliente(" . $row['id'] . ")'>Excluir</button>
+                                <a href='cad_cliente.php?id=" . $row['id'] . "' class='btn-alterar'>Alterar</a>
+                                <button style='background-color: #FF0000; color: #fff;' class='btn-excluir' onclick='excluirCliente(" . $row['id'] . ")'>Excluir</button>
                             </div>
-                          </td>";
+                        </td>";
                     echo "</tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
-
-    <script>
-        function alterarCliente(clienteId) {
-            // Implemente a lógica para ação de alterar o cliente
-            // Você pode redirecionar o usuário para a página de edição do cliente com o ID passado
-        }
-
-        function excluirCliente(clienteId) {
-            // Implemente a lógica para ação de excluir o cliente
-            // Você pode mostrar um diálogo de confirmação antes de excluir
-        }
-    </script>
 </body>
 
 </html>
