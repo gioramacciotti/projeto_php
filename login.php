@@ -148,7 +148,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <button type="submit">ENTRAR</button>
         </div><br>
         <p style="text-align: center; margin-top: 10px;">
-            Não tem uma conta? <a href="cad_usuario.php">Registre-se</a>
+            Não tem uma conta? <a href="cad_cliente.php">Registre-se</a>
         </p>
         </form>
     </div>

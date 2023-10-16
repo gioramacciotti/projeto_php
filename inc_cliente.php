@@ -1,5 +1,5 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include('conexao.php');
@@ -16,6 +16,10 @@ $cpf_cnpj = $_POST["cpf_cnpj"];
 $rg = $_POST["rg"];
 $telefone = $_POST["telefone"];
 $celular = $_POST["celular"];
+$login = $_POST["login"];
+$senha = $_POST["senha"];
+var_dump($senha); // Debugging
+$senha = password_hash($senha, PASSWORD_DEFAULT);
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 mysqli_begin_transaction($con) or die(mysqli_connect_error());
@@ -26,14 +30,21 @@ try {
         VALUES ('$nome', '$data_nasc', '$endereco', '$numero', '$bairro', '$cidade', '$estado', '$email', '$cpf_cnpj', '$rg', '$telefone', '$celular')";
     $resu = mysqli_query($con, $query);
 
+    // Recuperar o ID do cliente inserido
+    $id_cliente = mysqli_insert_id($con);
+
+    // Inserir o usuário na tabela de login_usuarios
+    $query_usuario = "INSERT INTO login_usuarios (login, senha, id_cliente) VALUES ('$login', '$senha', '$id_cliente')";
+    $resu_usuario = mysqli_query($con, $query_usuario);
+
     mysqli_commit($con);
-    $_SESSION['msg'] = "<p style='color:green; text-align:center;'><b>Cliente cadastrado com sucesso</b></p>";
+    $_SESSION['msg'] = "<p style='color:green; text-align:center;'><b>Usuário cadastrado com sucesso</b></p>";
     header("Location: cad_cliente.php");
     
 } catch (mysqli_sql_exception $exception) {
     mysqli_rollback($con);
 
-    $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>O cliente não foi cadastrado, verifique</b></p>";
+    $_SESSION['msg'] = "<p style='color:red; text-align:center;'><b>O usuário não foi cadastrado, verifique</b></p>";
     header("Location: cad_cliente.php");  
     throw $exception;
 }

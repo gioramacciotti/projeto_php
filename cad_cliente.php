@@ -121,6 +121,20 @@ if (session_status() == PHP_SESSION_NONE) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("senha");
+            const toggleIcon = document.getElementById("toggle-password-icon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            }
+        }
+
         function restrictMaxLength(input, maxLength) {
             if (input.value.length > maxLength) {
                 input.value = input.value.slice(0, maxLength);
@@ -134,6 +148,9 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+    ?>
     <header>
         <div class="logo">
             <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
@@ -145,10 +162,25 @@ if (session_status() == PHP_SESSION_NONE) {
             <a href="logout.php" class="sign-out-link">
             <i class="fas fa-sign-out-alt"></i>&nbsp;Sair
             </a>
-
         </div>
     </header>
+
     <?php
+    } else {
+    ?>    
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
+        </div>        
+        <div style="display: flex; align-items: center;">
+            <a href="login.php" class="home-link">
+                <i class="fas fa-home"></i>&nbsp;Início
+            </a>
+        </div>
+    </header>
+
+    <?php    
+    }
     if (isset($_SESSION['msg'])) {
         echo $_SESSION['msg'];
         unset($_SESSION['msg']);
@@ -230,6 +262,22 @@ if (session_status() == PHP_SESSION_NONE) {
                     <div>
                         <label for="celular">Celular:</label>
                         <input type="text" id="celular" name="celular" oninput="restrictMaxLength(this, 11)" placeholder="Informe o número de celular">
+                    </div>
+                </div>
+            </div>
+            <div class="fieldset">
+                <span class="legend-text">Informações de Acesso</span>
+                <p>
+                <div class="row">
+                    <div>
+                        <label for="login">Nome de Usuário:</label>
+                        <input type="text" id="login" name="login" required oninput="restrictMaxLength(this, 20)" placeholder="Escolha um nome de usuário">
+                    </div>
+                    <div style="position: relative;">
+                        <label for="senha">Senha de Acesso:</label>
+                        <div class="password-container">
+                        <input type="password" id="senha" name="senha" required oninput="restrictMaxLength(this, 30)" placeholder="Escolha uma senha de acesso">
+                        <i class="fas fa-eye-slash toggle-password-icon" id="toggle-password-icon" onclick="togglePasswordVisibility()"></i>
                     </div>
                 </div>
             </div>
