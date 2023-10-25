@@ -160,6 +160,10 @@ if (isset($_GET['id'])) {
             align-items: center;
         }
 
+        .logo img {
+            height: 50px;
+        }
+
         .home-link,
         .sign-out-link {
             color: #08103B;
@@ -172,8 +176,13 @@ if (isset($_GET['id'])) {
         .home-icon::after,
         .sign-out-icon::after {
             content: "\00a0";
-        }
+        }        
 
+        .back-icon {
+            color: #136DAF; 
+            cursor: pointer;
+            float: left;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -245,7 +254,11 @@ if (isset($_GET['id'])) {
     ?>
 
     <div class="container">
-        <h1><?php echo $alteracao ? 'Atualizar Cadastro' : 'Cadastre-se' ?></h1>
+        <h1>
+            <a href="tela_cliente.php" class="back-link">
+            <i class="fas fa-arrow-left back-icon" onclick="window.location='tela_clientes.php';"></i>
+            </a>
+            <?php echo $alteracao ? 'Atualizar Cadastro' : 'Cadastrar' ?></h1>
         <div id="message-dialog" title="Mensagem" style="display: none;">
             <p id="message-content"></p>
         </div>
@@ -256,7 +269,7 @@ if (isset($_GET['id'])) {
                 <p>
                 <div>
                     <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" name="nome" required oninput="restrictMaxLength(this, 100)" placeholder="Informe seu nome completo" value="<?php echo $cliente['nome']; ?>">
+                    <input type="text" id="nome" name="nome" required oninput="restrictMaxLength(this, 100)" placeholder="Informe o nome completo" value="<?php echo $cliente['nome']; ?>">
                     <label for="data_nasc">Data de Nascimento:</label>
                     <input type="date" name="data_nasc" required placeholder="dd/mm/yyyy" value="<?php echo $cliente['data_nasc']; ?>">
                 </div>
@@ -267,7 +280,7 @@ if (isset($_GET['id'])) {
                 <div class="row">
                     <div>
                         <label for="endereco">Endereço:</label>
-                        <input type="text" id="endereco" name="endereco" required oninput="restrictMaxLength(this, 100)" placeholder="Informe seu endereço" value="<?php echo $cliente['endereco']; ?>">
+                        <input type="text" id="endereco" name="endereco" required oninput="restrictMaxLength(this, 100)" placeholder="Informe o endereço" value="<?php echo $cliente['endereco']; ?>">
                         <label for="numero">Número:</label>
                         <input type="text" id="numero" name="numero" required oninput="restrictMaxLength(this, 10)" placeholder="Informe o número" value="<?php echo $cliente['numero']; ?>">
                     </div>

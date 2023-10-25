@@ -11,8 +11,9 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
 
 include('conexao.php');
 
-// Recupere os clientes da tabela
-$query = "SELECT * FROM clientes";
+// Recupere os pedidos da tabela
+$query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
+          JOIN clientes c ON p.id_cliente = c.id";
 $result = mysqli_query($con, $query);
 ?>
 
@@ -21,7 +22,7 @@ $result = mysqli_query($con, $query);
 
 <head>
     <meta charset="UTF-8">
-    <title>Painel de Clientes</title>
+    <title>Painel de Pedidos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -30,7 +31,7 @@ $result = mysqli_query($con, $query);
             margin: 0;
             padding: 0;
         }
-        
+
         header {
             background-color: #ffffff;
             padding: 10px;
@@ -42,7 +43,7 @@ $result = mysqli_query($con, $query);
         .logo {
             display: flex;
             align-items: center;
-        }        
+        }
 
         .logo img {
             height: 50px;
@@ -54,7 +55,7 @@ $result = mysqli_query($con, $query);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             padding: 20px;
             margin: 20px auto;
-            max-width: 90%; /* Define a largura máxima do container */
+            max-width: 90%;
             overflow-x: auto;
         }
 
@@ -63,23 +64,8 @@ $result = mysqli_query($con, $query);
             text-align: center;
         }
 
-        label {
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-
         table {
-            width: 100%;
+            width: -webkit-fill-available;
             border-collapse: collapse;
         }
 
@@ -107,7 +93,7 @@ $result = mysqli_query($con, $query);
 
         .btn-container {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
         }
 
         button {
@@ -142,11 +128,6 @@ $result = mysqli_query($con, $query);
             margin-right: 15px;
         }
 
-        .btn-filtro {
-            width: 100%;
-            height: 42px;
-        }
-
         .btn-alterar,
         .btn-excluir {
             background-color: #FF0000;
@@ -154,7 +135,7 @@ $result = mysqli_query($con, $query);
             padding: 8px 20px;
             border: none;
             border-radius: 6px;
-            cursor: pointer;    
+            cursor: pointer;
             width: 95px;
             transition: background-color 0.3s;
             text-decoration: none;
@@ -163,30 +144,31 @@ $result = mysqli_query($con, $query);
         }
 
         .btn-alterar {
-            background-color: #136DAF; 
+            background-color: #136DAF;
             width: 50px;
         }
-        
+
         .btn-excluir:hover {
-            background-color: #D32F2F; 
+            background-color: #D32F2F;
         }
 
         .btn-alterar:hover {
-            background-color: #033255; 
+            background-color: #033255;
         }
+
         .btn-excluir {
             margin-left: 2%;
         }
-        
+
         .filter-row {
-        display: flex;
-        justify-content: flex-start;
-        margin-bottom: 20px; 
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
         }
 
         .filter-field {
             width: 20%;
-            margin-right: 50px; /* Espaçamento entre os campos de filtro */
+            margin-right: 50px;
         }
 
         .filter-button {
@@ -196,13 +178,13 @@ $result = mysqli_query($con, $query);
 
         .btn-filtro {
             width: 150px;
-            height: 42px; 
+            height: 42px;
             padding: 12px;
             font-weight: bold;
             font-size: 16px;
-        }         
+        }
 
-        .add-cliente-button {
+        .add-pedido-button {
             background-color: #136DAF;
             color: #fff;
             padding: 8px 20px;
@@ -212,42 +194,23 @@ $result = mysqli_query($con, $query);
             font-weight: bold;
             text-decoration: none;
             font-size: 20px;
-            float: right; /* Move o botão para o canto superior direito */
+            float: right; 
         }
 
-        .add-cliente-button:hover {
+        .add-pedido-button:hover {
             background-color: #033255;
-        }
+        }        
 
         .back-icon {
-            color: #136DAF;
+            color: #136DAF; 
             cursor: pointer;
             float: left;
         }
     </style>
-    <script>
-        function excluirCliente(clienteID) {
-            if (confirm("Tem certeza de que deseja excluir este cliente?")) {
-            // Enviar uma solicitação AJAX para o arquivo PHP de exclusão
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'del_cliente.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status == 200) {                    
-                    location.reload();                    
-                    alert('Cliente excluído com sucesso!');
-                } else {
-                    alert('Ocorreu um erro ao excluir o cliente.');
-                }
-            };
-            xhr.send('clienteID=' + clienteID);
-            }
-        }
-    </script>
 </head>
 
 <body>
-    <header>
+<header>
         <div class="logo">
             <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
         </div>
@@ -266,73 +229,34 @@ $result = mysqli_query($con, $query);
             <a href="index.html" class="back-link">
             <i class="fas fa-arrow-left back-icon" onclick="window.location='index.html';"></i>
             </a>
-            Painel de Clientes
-            <a href="cad_cliente.php" class="add-cliente-button">Incluir Cliente</a>
-        </h1>
-        <form method="post">
-            <div class="filter-row">
-            <div class="filter-field">
-                <label for="filter-name">Filtrar por Nome:</label>
-                <input type="text" name="filter-name" id="filter-name style="width: 10%">
-            </div>
-            <div class="filter-field">
-                <label for="filter-city">Filtrar por Cidade:</label>
-                <input type="text" name="filter-city" id="filter-city">
-            </div>
-            <div class="filter-button">
-                <button type="submit" name="filter-submit" class="btn-filtro">Filtrar</button>
-            </div>
-            </div>
-        </form>
-
+            Painel de Pedidos 
+            <a href="cad_pedido.php" class="add-pedido-button">Incluir Pedido</a></h1>
         <table>
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Número</th>
-                    <th>Bairro</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
-                    <th>E-mail</th>
-                    <th>CPF/CNPJ</th>
-                    <th>RG</th>
-                    <th>Telefone</th>
-                    <th>Celular</th>
-                    <th>Data de Nascimento</th>
+                    <th>ID do Pedido</th>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Observação</th>
+                    <th>Condição de Pagamento</th>
+                    <th>Prazo de Entrega</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                if (isset($_POST['filter-submit'])) {
-                    $filterName = $_POST['filter-name'];
-                    $filterCity = $_POST['filter-city'];
-                    $query = "SELECT * FROM clientes WHERE nome LIKE '%$filterName%' AND cidade LIKE '%$filterCity%'";
-                } else {
-                    $query = "SELECT * FROM clientes";
-                }
-
-                $result = mysqli_query($con, $query);
-
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
-                    echo "<td>" . $row['nome'] . "</td>";
-                    echo "<td>" . $row['endereco'] . "</td>";
-                    echo "<td>" . $row['numero'] . "</td>";
-                    echo "<td>" . $row['bairro'] . "</td>";
-                    echo "<td>" . $row['cidade'] . "</td>";
-                    echo "<td>" . $row['estado'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td>" . $row['cpf_cnpj'] . "</td>";
-                    echo "<td>" . $row['rg'] . "</td>";
-                    echo "<td>" . $row['telefone'] . "</td>";
-                    echo "<td>" . $row['celular'] . "</td>";
-                    echo "<td>" . $row['data_nasc'] . "</td>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['data'] . "</td>";
+                    echo "<td>" . $row['nome_cliente'] . "</td>";
+                    echo "<td>" . $row['observacao'] . "</td>";
+                    echo "<td>" . $row['cond_pagto'] . "</td>";
+                    echo "<td>" . $row['prazo_entrega'] . "</td>";
                     echo "<td>
                             <div class='btn-container'>
-                                <a href='cad_cliente.php?id=" . $row['id'] . "' class='btn-alterar'>Alterar</a>
-                                <button class='btn-excluir' onclick='excluirCliente(" . $row['id'] . ")'>Excluir</button>
+                                <a href='alt_pedido.php?id=" . $row['id'] . "' class='btn-alterar'>Editar</a>
+                                <button class='btn-excluir' onclick='excluirPedido(" . $row['id'] . ")'>Excluir</button>
                             </div>
                             </td>";
                     echo "</tr>";
@@ -341,6 +265,25 @@ $result = mysqli_query($con, $query);
             </tbody>
         </table>
     </div>
-</body>
 
+    <script>
+        function excluirPedido(pedidoID) {
+            if (confirm("Tem certeza de que deseja excluir este pedido?")) {
+                // Enviar uma solicitação AJAX para o arquivo PHP de exclusão
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'del_pedido.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onload = function () {
+                    if (xhr.status == 200) {
+                        location.reload();
+                        alert('Pedido excluído com sucesso!');
+                    } else {
+                        alert('Ocorreu um erro ao excluir o pedido.');
+                    }
+                };
+                xhr.send('pedidoID=' + pedidoID);
+            }
+        }
+    </script>
+</body>
 </html>
