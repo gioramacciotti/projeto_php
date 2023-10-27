@@ -57,7 +57,6 @@ if (isset($_GET['id'])) {
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -68,122 +67,7 @@ if (isset($_GET['id'])) {
     <title>Cadastro de Usuários e Clientes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 70%;
-            margin: 20px auto;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        label {
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            width: 98%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-
-        .fieldset {
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .legend-text {
-            font-weight: bold;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        button {
-            background-color: #136DAF;
-            color: #fff;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 48%;
-        }
-
-        button:hover {
-            background-color: #033255;
-        }
-
-        .toggle-password-icon {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .home-link,
-        .sign-out-link {
-            color: #08103B;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-        
-        .home-icon::after,
-        .sign-out-icon::after {
-            content: "\00a0";
-        }        
-
-        .back-icon {
-            color: #136DAF; 
-            cursor: pointer;
-            float: left;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
@@ -219,7 +103,7 @@ if (isset($_GET['id'])) {
     ?>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
+            <img src="logo.png" alt="Verzi Websystem">
         </div>
         <div style="display: flex; align-items: center;">
             <a href="index.html" class="home-link">
@@ -236,7 +120,7 @@ if (isset($_GET['id'])) {
     ?>    
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
+            <img src="logo.png" alt="Verzi Websystem">
         </div>        
         <div style="display: flex; align-items: center;">
             <a href="login.php" class="home-link">
@@ -271,7 +155,11 @@ if (isset($_GET['id'])) {
                     <label for="nome">Nome Completo:</label>
                     <input type="text" id="nome" name="nome" required oninput="restrictMaxLength(this, 100)" placeholder="Informe o nome completo" value="<?php echo $cliente['nome']; ?>">
                     <label for="data_nasc">Data de Nascimento:</label>
-                    <input type="date" name="data_nasc" required placeholder="dd/mm/yyyy" value="<?php echo $cliente['data_nasc']; ?>">
+                    <input type="date" name="data_nasc" required placeholder="dd/mm/yyyy" value="<?php echo $cliente['data_nasc']; ?>">       
+                    <label for="cpf_cnpj">CPF ou CNPJ:</label>
+                    <input type="text" id="cpf_cnpj" name="cpf_cnpj" required oninput="restrictMaxLength(this, 14)" placeholder="Informe o CPF ou CNPJ" value="<?php echo $cliente['cpf_cnpj']; ?>">
+                    <label for="rg">Número de RG:</label>
+                    <input type="text" id="rg" name="rg" required oninput="restrictMaxLength(this, 10)" placeholder="Informe o número de RG" value="<?php echo $cliente['rg']; ?>">
                 </div>
             </div>
             <div class="fieldset">
@@ -314,16 +202,8 @@ if (isset($_GET['id'])) {
                         <label for="email">E-mail de Contato:</label>
                         <input type="email" id="email" name="email" required oninput="restrictMaxLength(this, 100)" placeholder="Informe o e-mail de contato" value="<?php echo $cliente['email']; ?>">
                     </div>
-                    <div>
-                        <label for="cpf_cnpj">CPF ou CNPJ:</label>
-                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" required oninput="restrictMaxLength(this, 14)" placeholder="Informe o CPF ou CNPJ" value="<?php echo $cliente['cpf_cnpj']; ?>">
-                    </div>
                 </div>
                 <div class="row">
-                    <div>
-                        <label for="rg">Número de RG:</label>
-                        <input type="text" id="rg" name="rg" required oninput="restrictMaxLength(this, 10)" placeholder="Informe o número de RG" value="<?php echo $cliente['rg']; ?>">
-                    </div>
                     <div>
                         <label for="telefone">Telefone de Contato:</label>
                         <input type="text" id="telefone" name="telefone" oninput="restrictMaxLength(this, 10)" placeholder="Informe o telefone de contato" value="<?php echo $cliente['telefone']; ?>">
@@ -353,8 +233,8 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="btn-container">
-                <button type="reset">Limpar</button>
-                <button type="submit"><?php echo $alteracao ? 'Atualizar Cadastro' : 'Finalizar Cadastro' ?></button>
+                <button type="reset" style="width:48%;">Limpar</button>
+                <button type="submit" style="width:48%;"><?php echo $alteracao ? 'Atualizar Cadastro' : 'Finalizar Cadastro' ?></button>
             </div>
         </form>
     </div>

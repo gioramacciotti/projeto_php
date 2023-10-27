@@ -26,160 +26,7 @@ function generateSelectOptions($query, $con, $valueField, $textField) {
         <title>Cadastro de Pedido</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f5f5f5;
-                margin: 0;
-                padding: 0;
-            }
-
-            .container {
-                background-color: #fff;
-                border-radius: 12px;
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                padding: 20px;
-                width: 70%;
-                margin: 20px auto;
-            }
-
-            h1 {
-                color: #333;
-                text-align: center;
-            }
-
-            label {
-                color: #333;
-                display: block;
-                margin-bottom: 10px;
-            }
-
-            input[type="text"],
-            input[type="date"],
-            input[type="number"],
-            select {
-                width: -webkit-fill-available;
-                padding: 12px;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                margin-bottom: 10px;
-            }
-
-            .fieldset {
-                border: 2px solid #ccc;
-                border-radius: 8px;
-                padding: 20px;
-                margin-bottom: 30px;
-            }
-
-            .legend-text {
-                font-weight: bold;
-            }
-
-            .btn-container {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            button {
-                background-color: #136DAF;
-                color: #fff;
-                padding: 15px 20px;
-                border: none;
-                border-radius: 6px;
-                cursor: pointer;
-                width: 48%;
-            }
-
-            button:hover {
-                background-color: #033255;
-            }
-
-            header {
-                background-color: #ffffff;
-                padding: 10px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .logo {
-                display: flex;
-                align-items: center;
-            }
-
-            .logo img {
-                height: 50px;
-            }
-
-            .home-link,
-            .sign-out-link {
-                color: #08103B;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                margin-right: 15px;
-            }
-
-            .home-icon::after,
-            .sign-out-icon::after {
-                content: "\00a0";
-            }
-
-            .items-row {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;            
-                justify-content: space-between;
-            }
-            
-            .items-row select {
-                width: -webkit-fill-available;
-                margin-right: 10px;            
-                margin-bottom: 0px;
-            }
-
-            .items-row label{
-                width: auto;
-                margin-right: 10px;
-                margin-bottom: 0px;          
-            }
-
-            .items-row input{
-                width: 65px;
-                margin-right: 10px;
-                margin-bottom: 0px;          
-            }
-
-            .remove-item {
-                color: red;
-                cursor: pointer;
-            }
-
-            .add-item-button {
-                float: right;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background-color: #136DAF;
-                color: #fff;
-                font-size: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-            }
-
-            .add-item-button:hover {
-                background-color: #033255;
-            }
-
-            .back-icon {
-                color: #136DAF;
-                cursor: pointer;
-                float: left;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
         <script>
             function clearForm() {
                 document.getElementById("user-registration-form").reset();
@@ -249,7 +96,7 @@ function generateSelectOptions($query, $con, $valueField, $textField) {
         <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) { ?>
             <header>
                 <div class="logo">
-                    <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
+                    <img src="logo.png" alt="Verzi Websystem">
                 </div>
                 <div style="display: flex; align-items: center;">
                     <a href="index.html" class="home-link">
@@ -263,7 +110,7 @@ function generateSelectOptions($query, $con, $valueField, $textField) {
         <?php } else { ?>
             <header>
                 <div class="logo">
-                    <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
+                    <img src="logo.png" alt="Verzi Websystem">
                 </div>
                 <div style="display: flex; align-items: center;">
                     <a href="login.php" class="home-link">
@@ -331,8 +178,8 @@ function generateSelectOptions($query, $con, $valueField, $textField) {
                     </div>
                 </div>
                 <div class="btn-container">
-                    <button type="reset">Limpar</button>
-                    <button type="submit">Incluir</button>
+                    <button type="reset" style="width:48%;">Limpar</button>
+                    <button type="submit" style="width:48%;">Incluir</button>
                 </div>
             </form>
         </div>

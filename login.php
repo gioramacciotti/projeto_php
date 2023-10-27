@@ -12,21 +12,18 @@ if (session_status() == PHP_SESSION_NONE) {
     <title>Login - Sistema de Cadastro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-        }
-
-        body {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
         }
-
         .container {
             background-color: #fff;
             border-radius: 12px;
@@ -35,91 +32,24 @@ if (session_status() == PHP_SESSION_NONE) {
             width: 30%;
             margin: auto;
             border: 4px solid #033255;
-        }
-
-        h1 {
-            color: #033255;
-            text-align: center;
-        }
-        
-        h2 {
-            text-align: center;
-            font-weight: normal;
-            font-size: 14px;
-            color: #033255;
-        }
-
-        label {
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 20px;            
-            box-sizing: border-box;
-        }
-
-        .fieldset {
-            border-radius: 8px;
-            padding: 20px;
-            padding-bottom: 0px;
-        }
-
-        .legend-text {
-            font-weight: bold;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        button {
-            background-color: #033255;
-            color: #fff;
-            padding: 15px 15px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 40%;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #136DAF;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
+        }      
+        .login-logo {
             display: flex;
             justify-content: center; 
             align-items: center;
             margin-bottom: 20px; 
         }
 
-        .logo img {
-            height: 60% !important;
-            width: 60%;
+        .login-logo img {
+            height: 50% !important;
+            width: 50%;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="logo">
+        <div class="login-logo">
             <img src="logo.png" alt="Verzi Websystem" style="height: 40px;">
         </div>
         <h1>Bem-vindo</h1>
@@ -138,18 +68,18 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
                 </div>
             </div>            
-        <?php
-        if (isset($_SESSION['msg'])) {
-            echo $_SESSION['msg'];
-            unset($_SESSION['msg']);
-        }
-        ?><br>
-        <div class="btn-container">
-            <button type="submit">ENTRAR</button>
-        </div><br>
-        <p style="text-align: center; margin-top: 10px;">
-            Não tem uma conta? <a href="cad_cliente.php">Registre-se</a>
-        </p>
+            <?php
+            if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }
+            ?><br>
+            <div class="btn-container">
+                <button type="submit">ENTRAR</button>
+            </div><br>
+            <p style="text-align: center; margin-top: 10px;">
+                Não tem uma conta? <a href="cad_cliente.php">Registre-se</a>
+            </p>
         </form>
     </div>
 </body>
