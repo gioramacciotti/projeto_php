@@ -23,152 +23,7 @@ $result = mysqli_query($con, $query);
     <meta charset="UTF-8">
     <title>Painel de Produtos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 90%;
-            overflow-x: auto;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 7px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #033255;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        button {
-            background-color: #136DAF;
-            color: #fff;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 48%;
-        }
-
-        button:hover {
-            background-color: #033255;
-        }
-
-        .home-link,
-        .sign-out-link {
-            color: #08103B;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-
-        .alterar-button,
-        .excluir-button {
-            background-color: #FF0000;
-            color: #fff;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 95px;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .alterar-button {
-            background-color: #136DAF;
-            width: 50px;
-        }
-
-        .excluir-button:hover {
-            background-color: #D32F2F;
-        }
-
-        .alterar-button:hover {
-            background-color: #033255;
-        }        
-
-        .add-produto-button {
-            background-color: #136DAF;
-            color: #fff;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 20px;
-            float: right; /* Move o botão para o canto superior direito */
-        }
-
-        .add-produto-button:hover {
-            background-color: #033255;
-        }        
-
-        .back-icon {
-            color: #136DAF; 
-            cursor: pointer;
-            float: left;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -192,7 +47,7 @@ $result = mysqli_query($con, $query);
             <i class="fas fa-arrow-left back-icon" onclick="window.location='index.html';"></i>
             </a>
             Painel de Produtos 
-            <a href="cad_produto.php" class="add-produto-button">Incluir Produto</a></h1>
+            <a href="cad_produto.php" class="add-button">Incluir Produto</a></h1>
         <table>
             <thead>
                 <tr>
@@ -215,8 +70,8 @@ $result = mysqli_query($con, $query);
                     echo "<td>" . $row['unidade_medida'] . "</td>";
                     echo "<td>
                             <div class='btn-container'>
-                                <a href='cad_produto.php?id=" . $row['id'] . "' class='alterar-button'>Editar</a>
-                                <button class='excluir-button' onclick='excluirProduto(" . $row['id'] . ")'>Excluir</button>
+                                <a href='cad_produto.php?id=" . $row['id'] . "' class='btn-alterar'>Editar</a>
+                                <button class='btn-excluir' onclick='excluirProduto(" . $row['id'] . ")'>Excluir</button>
                             </div>
                             </td>";
                     echo "</tr>";

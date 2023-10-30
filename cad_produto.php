@@ -44,112 +44,7 @@ if (isset($_GET['id'])) {
     <title>Cadastro de Produtos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 70%;
-            margin: 20px auto;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        label {
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        select {
-            width: 98%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-
-        .fieldset {
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .legend-text {
-            font-weight: bold;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        button {
-            background-color: #136DAF;
-            color: #fff;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 48%;
-        }
-
-        button:hover {
-            background-color: #033255;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .home-link,
-        .sign-out-link {
-            color: #08103B;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-
-        .home-icon::after,
-        .sign-out-icon::after {
-            content: "\00a0";
-        }      
-
-        .back-icon {
-            color: #136DAF; 
-            cursor: pointer;
-            float: left;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script>        
         function clearForm() {
             document.getElementById("user-registration-form").reset();
@@ -226,7 +121,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="btn-container">
                 <button type="reset">Limpar</button>
-                <button type="submit"><?php echo $alteracao ? 'Atualizar Produto' : 'Finalizar Cadastro' ?></button>
+                <button type="submit"><?php echo $alteracao ? 'Atualizar Produto' : 'Incluir Produto' ?></button>
             </div>
         </form>
     </div>

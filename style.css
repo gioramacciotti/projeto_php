@@ -4,64 +4,52 @@ body {
     margin: 0;
     padding: 0;
 }
-
 .container {
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 70%; 
+    width: 70%;
     margin: 20px auto;
+    box-sizing: border-box;
+    overflow: auto;
 }
-
 h1 {
     color: #333;
     text-align: center;
 }
-
 h2 {
     text-align: center;
     font-weight: normal;
     font-size: 14px;
 }
-
 label {
     color: #333;
     display: block;
     margin-bottom: 10px;
     font-size: 14px;
 }
-
-input[type="text"],
-input[type="date"],
-input[type="email"],
-input[type="password"],
-select,
-input[type="number"] {
+input[type="text"], input[type="date"], input[type="email"], input[type="password"], select, input[type="number"] {
     width: -webkit-fill-available;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    margin-bottom: 20px;            
+    margin-bottom: 20px;
     box-sizing: border-box;
 }
-
 .fieldset {
     border: 2px solid #ccc;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 30px;
 }
-
 .legend-text {
     font-weight: bold;
 }
-
 .btn-container {
     display: flex;
     justify-content: space-around;
 }
-
 button {
     background-color: #033255;
     color: #fff;
@@ -72,11 +60,9 @@ button {
     width: 30%;
     font-weight: bold;
 }
-
 button:hover {
     background-color: #136DAF;
 }
-
 header {
     background-color: #ffffff;
     padding: 10px;
@@ -84,27 +70,21 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
-.home-link,
-.sign-out-link {
+.home-link, .sign-out-link {
     color: #08103B;
     text-decoration: none;
     display: flex;
     align-items: center;
     margin-right: 15px;
 }
-
-.home-icon::after,
-.sign-out-icon::after {
+.home-icon::after, .sign-out-icon::after {
     content: "\00a0";
 }
-
 .back-icon {
     color: #033255;
     cursor: pointer;
     float: left;
 }
-
 .toggle-password-icon {
     position: absolute;
     top: 50%;
@@ -113,18 +93,15 @@ header {
     cursor: pointer;
     user-select: none;
 }
-
 .back-link {
     text-decoration: none;
     color: #136DAF;
 }
-
 .menu-container {
     margin-top: 20px;
     display: flex;
     justify-content: center;
 }
-
 .menu-button {
     width: 250px;
     height: 250px;
@@ -144,56 +121,46 @@ header {
     margin: 50px;
     padding: 30px;
 }
-
 .menu-button i {
     font-size: 40px;
     color: #033255;
 }
-
 .logo {
     display: flex;
     align-items: center;
 }
-
 .logo img {
     height: 50px;
 }
-            
 .items-row {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;            
+    margin-bottom: 10px;
     justify-content: space-between;
 }
-
 .items-row select {
     width: -webkit-fill-available;
-    margin-right: 10px;            
+    margin-right: 10px;
     margin-bottom: 0px;
 }
-
 .items-row label{
     width: auto;
     margin-right: 10px;
-    margin-bottom: 0px;          
+    margin-bottom: 0px;
 }
-
 .items-row input{
     width: 65px;
     margin-right: 10px;
-    margin-bottom: 0px;          
+    margin-bottom: 0px;
 }
-
 .remove-item {
     color: red;
     cursor: pointer;
 }
-
 .remove-item:hover {
     color: rgb(187, 0, 0);
     cursor: pointer;
 }
-
 .add-item-button {
     float: right;
     width: 40px;
@@ -207,7 +174,94 @@ header {
     align-items: center;
     cursor: pointer;
 }
-
 .add-item-button:hover {
     background-color: #136DAF;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+table, th, td {
+    border: 1px solid #ccc;
+}
+th, td {
+    padding: 7px;
+    text-align: left;
+    box-sizing: border-box;
+}
+th {
+    background-color: #033255;
+    color: #fff;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #ddd;
+}
+.add-button {
+    background-color: #136DAF;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    float: right;
+}
+.add-button:hover {
+    background-color: #033255;
+}
+.btn-alterar, .btn-excluir {
+    background-color: #FF0000;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 95px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+.btn-alterar {
+    background-color: #136DAF;
+    width: 50px;
+}
+.btn-excluir:hover {
+    background-color: #D32F2F;
+}
+.btn-alterar:hover {
+    background-color: #033255;
+}
+.btn-excluir {
+    margin-left: 2%;
+}
+.filter-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.filter-field {
+    width: 20%;
+    margin-right: 50px;
+}
+.filter-button {
+    padding-top: 5px;
+    align-self: center;
+}
+.btn-filtro {
+    width: 150px;
+    height: 42px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #136DAF 
+}
+.btn-filtro:hover {
+    background-color: #033255;
 }
