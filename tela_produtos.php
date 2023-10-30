@@ -47,7 +47,20 @@ $result = mysqli_query($con, $query);
             <i class="fas fa-arrow-left back-icon" onclick="window.location='index.html';"></i>
             </a>
             Painel de Produtos 
-            <a href="cad_produto.php" class="add-button">Incluir Produto</a></h1>
+            <a href="cad_produto.php" class="add-button">Incluir Produto</a>
+        </h1>
+        <form method="post">
+            <div class="filter-row">
+            <div class="filter-field">
+                <label for="filter-name">Filtrar por Nome:</label>
+                <input type="text" name="filter-name" id="filter-name style="width: 10%">
+            </div>
+            <div class="filter-button">
+                <button type="submit" name="filter-submit" class="btn-filtro">Filtrar</button>
+            </div>
+            </div>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -61,6 +74,15 @@ $result = mysqli_query($con, $query);
             </thead>
             <tbody>
                 <?php
+                if (isset($_POST['filter-submit'])) {
+                    $filterName = $_POST['filter-name'];
+                    $query = "SELECT * FROM produtos WHERE nome LIKE '%$filterName%'";
+                } else {
+                    $query = "SELECT * FROM produtos";
+                }
+
+                $result = mysqli_query($con, $query);
+
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $row['id'] . "</td>";

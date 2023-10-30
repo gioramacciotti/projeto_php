@@ -13,7 +13,7 @@ include('conexao.php');
 
 // Recupere os pedidos da tabela
 $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
-          JOIN clientes c ON p.id_cliente = c.id";
+          LEFT JOIN clientes c ON p.id_cliente = c.id";
 $result = mysqli_query($con, $query);
 ?>
 
@@ -48,7 +48,25 @@ $result = mysqli_query($con, $query);
             <i class="fas fa-arrow-left back-icon" onclick="window.location='index.html';"></i>
             </a>
             Painel de Pedidos 
-            <a href="cad_pedido.php" class="add-button">Incluir Pedido</a></h1>
+            <a href="cad_pedido.php" class="add-button">Incluir Pedido</a>
+        </h1>
+        
+        <form method="post">
+            <div class="filter-row">
+                <div class="filter-field">
+                    <label for="filter-date-start">Período inicial:</label>
+                    <input type="date" name="filter-date-start" id="filter-date-start style="width: 10%">
+                    </div>
+                <div class="filter-field">
+                    <label for="filter-date-final">Período final:</label>
+                    <input type="date" name="filter-date-final" id="filter-date-final style="width: 10%">
+                </div>
+                <div class="filter-button">
+                    <button type="submit" name="filter-submit" class="btn-filtro">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -63,10 +81,45 @@ $result = mysqli_query($con, $query);
             </thead>
             <tbody>
                 <?php
+                if (isset($_POST['filter-submit'])) {
+                    $filterDateStart = $_POST['filter-date-start'];
+                    $filterDateFinal = $_POST['filter-date-final'];
+                
+                    if (!empty($filterDateStart) && !empty($filterDateFinal)) {
+                        $dateStart = date('Y-m-d', strtotime($filterDateStart));
+                        $dateFinal = date('Y-m-d', strtotime($filterDateFinal));
+                        $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
+                                  LEFT JOIN clientes c ON p.id_cliente = c.id
+                                  WHERE p.data BETWEEN '$dateStart' AND '$dateFinal'";
+
+                    } elseif (!empty($filterDateStart)) {
+                        $dateStart = date('Y-m-d', strtotime($filterDateStart));
+                        $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
+                                  LEFT JOIN clientes c ON p.id_cliente = c.id
+                                  WHERE p.data >= '$dateStart'";
+
+                    } elseif (!empty($filterDateFinal)) {
+                        $dateFinal = date('Y-m-d', strtotime($filterDateFinal));
+                        $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
+                                  LEFT JOIN clientes c ON p.id_cliente = c.id
+                                  WHERE p.data <= '$dateFinal'";
+
+                    } else {
+                        $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
+                                  LEFT JOIN clientes c ON p.id_cliente = c.id";
+                    }
+                } else {
+                    $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
+                              LEFT JOIN clientes c ON p.id_cliente = c.id";
+                }
+                
+
+                $result = mysqli_query($con, $query);
+
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['data'] . "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($row['data'])) . "</td>";
                     echo "<td>" . $row['nome_cliente'] . "</td>";
                     echo "<td>" . $row['observacao'] . "</td>";
                     echo "<td>" . $row['cond_pagto'] . "</td>";
