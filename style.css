@@ -13,6 +13,7 @@ body {
     margin: 20px auto;
     box-sizing: border-box;
     overflow: auto;
+    inline-size: fit-content;
 }
 h1 {
     color: #333;
@@ -184,6 +185,7 @@ table {
 }
 table, th, td {
     border: 1px solid #ccc;
+    inline-size: auto;
 }
 th, td {
     padding: 7px;
