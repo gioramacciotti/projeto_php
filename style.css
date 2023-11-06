@@ -9,11 +9,10 @@ body {
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 70%;
+    width: 90%;
     margin: 20px auto;
     box-sizing: border-box;
     overflow: auto;
-    inline-size: fit-content;
 }
 h1 {
     color: #333;
@@ -185,7 +184,7 @@ table {
 }
 table, th, td {
     border: 1px solid #ccc;
-    inline-size: auto;
+    /*inline-size: auto;*/
 }
 th, td {
     padding: 7px;

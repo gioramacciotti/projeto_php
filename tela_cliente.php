@@ -3,7 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Certifique-se de que o usuário está logado, caso contrário, redirecione para a página de login
 if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
     header("Location: login.php");
     exit();
@@ -24,25 +23,6 @@ $result = mysqli_query($con, $query);
     <title>Painel de Clientes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
     <link rel="stylesheet" href="style.css">
-    <script>
-        function excluirCliente(clienteID) {
-            if (confirm("Tem certeza de que deseja excluir este cliente?")) {
-            // Enviar uma solicitação AJAX para o arquivo PHP de exclusão
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'del_cliente.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status == 200) {                    
-                    location.reload();                    
-                    alert('Cliente excluído com sucesso!');
-                } else {
-                    alert('Ocorreu um erro ao excluir o cliente.');
-                }
-            };
-            xhr.send('clienteID=' + clienteID);
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -127,7 +107,7 @@ $result = mysqli_query($con, $query);
                     echo "<td>" . $row['rg'] . "</td>";
                     echo "<td>" . $row['telefone'] . "</td>";
                     echo "<td>" . $row['celular'] . "</td>";
-                    echo "<td>" . $row['data_nasc'] . "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($row['data_nasc'])) . "</td>";
                     echo "<td>
                             <div class='btn-container'>
                                 <a href='cad_cliente.php?id=" . $row['id'] . "' class='btn-alterar'>Alterar</a>
@@ -140,6 +120,23 @@ $result = mysqli_query($con, $query);
             </tbody>
         </table>
     </div>
+    <script>
+        function excluirCliente(clienteID) {
+            if (confirm("Tem certeza de que deseja excluir este cliente?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'del_cliente.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status == 200) {                    
+                    location.reload();                    
+                    alert('Cliente excluído com sucesso!');
+                } else {
+                    alert('Ocorreu um erro ao excluir o cliente.');
+                }
+            };
+            xhr.send('clienteID=' + clienteID);
+            }
+        }
+    </script>
 </body>
-
 </html>

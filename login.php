@@ -29,7 +29,7 @@ if (session_status() == PHP_SESSION_NONE) {
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            width: 30%;
+            width: 45%;
             margin: auto;
             border: 4px solid #033255;
         }      

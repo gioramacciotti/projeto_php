@@ -108,7 +108,7 @@ $result = mysqli_query($con, $query);
             if (confirm("Tem certeza de que deseja excluir este produto?")) {
                 // Enviar uma solicitação AJAX para o arquivo PHP de exclusão
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'excluir_produto.php', true);
+                xhr.open('POST', 'del_produto.php', true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 xhr.onload = function () {
                     if (xhr.status == 200) {

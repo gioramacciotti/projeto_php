@@ -3,7 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Certifique-se de que o usuário está logado, caso contrário, redirecione para a página de login
 if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
     header("Location: login.php");
     exit();
@@ -11,7 +10,6 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
 
 include('conexao.php');
 
-// Recupere os pedidos da tabela
 $query = "SELECT p.id, p.data, c.nome AS nome_cliente, p.observacao, p.cond_pagto, p.prazo_entrega FROM pedidos p
           LEFT JOIN clientes c ON p.id_cliente = c.id";
 $result = mysqli_query($con, $query);
@@ -140,7 +138,6 @@ $result = mysqli_query($con, $query);
     <script>
         function excluirPedido(pedidoID) {
             if (confirm("Tem certeza de que deseja excluir este pedido?")) {
-                // Enviar uma solicitação AJAX para o arquivo PHP de exclusão
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'del_pedido.php', true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
