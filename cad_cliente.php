@@ -238,5 +238,4 @@ if (isset($_GET['id'])) {
             </div>
         </form>
     </div>
-</body>
-</html>
+</body></html>
