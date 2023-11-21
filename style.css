@@ -149,7 +149,7 @@ header {
     margin-bottom: 0px;
 }
 .items-row input{
-    width: 65px;
+    width: 90px;
     margin-right: 10px;
     margin-bottom: 0px;
 }
@@ -266,4 +266,24 @@ tr:hover {
 }
 .btn-filtro:hover {
     background-color: #033255;
+}
+.fieldset input[readonly] {
+    background-color: #f2f2f2;
+    pointer-events: none;
+}
+.fields-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+}
+.fields-row label{
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+.fields-row input{
+    width: 90px;
+    margin-right: 10px;
+    margin-bottom: 0px;
 }

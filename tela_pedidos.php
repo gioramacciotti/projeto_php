@@ -124,7 +124,7 @@ $result = mysqli_query($con, $query);
                     echo "<td>" . $row['prazo_entrega'] . "</td>";
                     echo "<td>
                             <div class='btn-container'>
-                                <a href='alt_pedido.php?id=" . $row['id'] . "' class='btn-alterar'>Editar</a>
+                                <a href='cad_pedido.php?id=" . $row['id'] . "' class='btn-alterar'>Alterar</a>
                                 <button class='btn-excluir' onclick='excluirPedido(" . $row['id'] . ")'>Excluir</button>
                             </div>
                             </td>";
